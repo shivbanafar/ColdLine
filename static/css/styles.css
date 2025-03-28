@@ -1,0 +1,319 @@
+/* Base Styles */
+:root {
+    --primary-color: #0078d4;
+    --secondary-color: #2b88d8;
+    --success-color: #107c10;
+    --danger-color: #d13438;
+    --light-color: #f3f2f1;
+    --dark-color: #252423;
+    --gray-color: #8a8886;
+    --border-radius: 4px;
+    --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f9f9f9;
+    background-image: url('C:\Users\Kevin Antony\Desktop\azureai-kevin-patch-2\static\images\background.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: var(--dark-color);
+    line-height: 1.6;
+}
+
+/* Add a semi-transparent overlay to ensure readability */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(249, 249, 249, 0.7);
+    z-index: -1;
+}
+
+.app-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    position: relative;
+}
+
+/* Header Styles */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid #e1e1e1;
+    margin-bottom: 20px;
+}
+
+h1 {
+    font-size: 24px;
+    color: var(--primary-color);
+}
+
+.status-indicator {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+}
+
+.status-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.status-dot.connected {
+    background-color: var(--success-color);
+}
+
+.status-dot.disconnected {
+    background-color: var(--danger-color);
+}
+
+.status-dot.connecting {
+    background-color: var(--gray-color);
+}
+
+/* Main Content Styles */
+main {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex-grow: 1;
+}
+
+@media (min-width: 768px) {
+    main {
+        flex-direction: row;
+    }
+}
+
+section {
+    flex: 1;
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    padding: 20px;
+}
+
+h2 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+}
+
+.transcription-area, .guidance-area {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.transcript-container, .guidance-container {
+    flex-grow: 1;
+    overflow-y: auto;
+    max-height: 500px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: var(--border-radius);
+}
+
+.transcript-placeholder, .guidance-placeholder {
+    color: var(--gray-color);
+    font-style: italic;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.transcript-item, .guidance-item {
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: var(--border-radius);
+    background-color: white;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.transcript-role {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: var(--primary-color);
+}
+
+.guidance-text {
+    margin-bottom: 10px;
+}
+
+.feedback-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.feedback-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 50%;
+    transition: background-color 0.2s;
+}
+
+.feedback-button:hover {
+    background-color: #f0f0f0;
+}
+
+.feedback-button.helpful {
+    color: var(--success-color);
+}
+
+.feedback-button.not-helpful {
+    color: var(--danger-color);
+}
+
+.feedback-button.selected {
+    background-color: #f0f0f0;
+}
+
+/* Footer Styles */
+footer {
+    margin-top: 20px;
+    padding: 20px 0;
+    border-top: 1px solid #e1e1e1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.mic-button {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s;
+}
+
+.mic-button:hover {
+    background-color: var(--secondary-color);
+}
+
+.mic-button.recording {
+    background-color: var(--danger-color);
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.mic-label {
+    font-size: 14px;
+    color: var(--gray-color);
+}
+
+.language-selector {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+select {
+    padding: 8px;
+    border-radius: var(--border-radius);
+    border: 1px solid #e1e1e1;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal.show {
+    display: flex;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: var(--border-radius);
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+}
+
+.close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+#acknowledgeError {
+    margin-top: 15px;
+    padding: 8px 15px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    footer {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .language-selector {
+        width: 100%;
+        justify-content: center;
+    }
+}

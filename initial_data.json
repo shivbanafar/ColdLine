@@ -1,0 +1,52 @@
+{
+  "sales_scripts": [
+      {
+          "scenario": "B2B Interaction",
+          "scripts": [
+              {
+                  "client_query": "What security measures do you have?",
+                  "ai_response": "We follow enterprise-grade security: end-to-end encryption, SOC 2 compliance, and role-based access control."
+              },
+              {
+                  "client_query": "What makes your CRM better than others?",
+                  "ai_response": "Our CRM integrates seamlessly with Salesforce and Slack, boosting team productivity by 35%."
+              },
+              {
+                  "client_query": "How does your CRM help close more deals?",
+                  "ai_response": "AI-driven deal scoring prioritizes high-value leads and recommends next steps based on past success."
+              },
+              {
+                  "client_query": "How do you ensure ROI? We can't afford risks.",
+                  "ai_response": "We predict a 15–25% conversion boost by automating follow-ups and optimizing priorities. Custom ROI dashboards track real-time revenue impact."
+              }
+          ]
+      },
+      {
+          "scenario": "C2B Interaction",
+          "scripts": [
+              {
+                  "client_query": "What's included in the HOA fees?",
+                  "ai_response": "The HOA fee covers landscaping, community amenities, and exterior maintenance."
+              },
+              {
+                  "client_query": "What's the home appreciation rate in this area?",
+                  "ai_response": "Homes here have appreciated X% annually over the past five years."
+              },
+              {
+                  "client_query": "Is this property in a good school district?",
+                  "ai_response": "Yes! The area has top-rated schools like [School Name List]."
+              },
+              {
+                  "client_query": "Has the price of property number 3 changed recently?",
+                  "ai_response": "Yes, it was listed at $X and recently reduced by $Y."
+              }
+          ]
+      }
+  ],
+  "faqs": [
+      {"question": "What products do you offer?", "answer": "We offer a range of solutions. Could you tell me more about your specific needs?"}
+  ],
+  "product_details": [
+      {"name": "Default Product", "description": "Our flagship product designed to meet your needs."}
+  ]
+}

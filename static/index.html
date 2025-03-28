@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ColdLine</title>
+    <script src="https://aka.ms/csspeech/jsbrowserpackageraw"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'black-base': '#121212',
+                        'black-light': '#1E1E1E',
+                        'purple-light': '#E6E6FA',
+                        'purple-medium': '#D8BFD8',
+                        'purple-dark': '#8A4FFF'
+                    },
+                    boxShadow: {
+                        'card': '0 10px 15px -3px rgba(138, 79, 255, 0.2), 0 4px 6px -2px rgba(138, 79, 255, 0.1)',
+                        'button': '0 10px 15px -3px rgba(138, 79, 255, 0.3), 0 4px 6px -2px rgba(138, 79, 255, 0.2)'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-image: url('/static/images/img1.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(18, 18, 18, 0.7);
+            z-index: -1;
+        }
+        select {
+            text-align-last: center;
+        }
+        select option {
+            text-align: center;
+        }
+        /* Custom scrollbar for card contents */
+        .scrollable-content {
+            max-height: 300px;  /* Adjust height as needed */
+            overflow-y: auto;
+        }
+        /* Webkit (Chrome, Safari) scrollbar */
+        .scrollable-content::-webkit-scrollbar {
+            width: 6px;
+        }
+        .scrollable-content::-webkit-scrollbar-track {
+            background: rgba(138, 79, 255, 0.1);
+        }
+        .scrollable-content::-webkit-scrollbar-thumb {
+            background: rgba(138, 79, 255, 0.5);
+            border-radius: 3px;
+        }
+        /* Firefox scrollbar */
+        .scrollable-content {
+            scrollbar-width: thin;
+            scrollbar-color: rgba(138, 79, 255, 0.5) rgba(138, 79, 255, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-black-base text-white min-h-screen flex flex-col">
+    <div class="container mx-auto px-4 py-6 max-w-7xl flex-1 flex flex-col">
+        <header class="flex justify-between items-center mb-6 border-b border-purple-dark/20">
+            <h1 style="font-family: 'Satoshi', 'Neue Haas Grotesk', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; font-size: 2.5rem; font-weight: 700; text-align: center; letter-spacing: -1px;">
+                <span style="color: #ffffff;">Cold</span><span style="color: #8A4FFF;">Line</span>
+            </h1>
+            <div class="flex items-center space-x-2" id="connectionStatus">
+                <span class="w-3 h-3 rounded-full status-dot bg-rose-500 disconnected:block connected:hidden"></span>
+                <span class="w-3 h-3 rounded-full status-dot bg-green-500 disconnected:hidden connected:block"></span>
+                <span class="text-sm text-purple-medium status-text">Disconnected</span>
+            </div>
+        </header>
+
+        <main class="space-y-6 flex-1 flex flex-col">
+            <section class="bg-black-light shadow-card rounded-lg p-6 border border-purple-dark/20">
+                <div class="flex flex-col items-center space-y-4">
+                    <button id="micButton" class="w-32 h-32 rounded-full bg-purple-dark text-white flex items-center justify-center hover:bg-purple-medium shadow-button">
+                        <i class="fas fa-microphone text-4xl"></i>
+                    </button>
+                    
+                    
+                    <div class="w-full max-w-sm flex space-x-2">
+                        <select id="languageSelect" class="w-1/2 bg-black-base border border-purple-dark/30 rounded-md px-2 py-1 text-white text-sm text-center transition-all duration-300 ease-in-out focus:ring-2 focus:ring-purple-dark focus:border-transparent">
+                            <option value="en">English</option>
+                            <option value="fr">French</option>
+                            <option value="de">German</option>
+                            <option value="zh">Chinese</option>
+                            <option value="hi">Hindi</option>
+                        </select>
+                        <label 
+                            for="fileUpload" 
+                            class="w-1/2 bg-black-base border border-purple-dark/30 rounded-md px-2 py-1 text-sm text-white-medium flex items-center justify-center cursor-pointer hover:bg-black-base/50 hover:border-purple-dark/50 transition-all duration-300"
+                        >
+                            <i class="fas fa-upload mr-2"></i>
+                            Upload File
+                            <input 
+                                type="file" 
+                                id="fileUpload" 
+                                class="hidden" 
+                                multiple
+                            >
+                        </label>
+                    </div>
+                </div>
+            </section>
+    
+            <div class="grid md:grid-cols-2 gap-6 flex-1">
+                <section class="bg-black-light shadow-card rounded-lg p-6 border border-purple-dark/20 flex flex-col">
+                    <h2 class="text-xl font-semibold text-purple-medium mb-4">Conversation Transcripts</h2>
+                    <div id="transcriptContainer" class="scrollable-content space-y-4 flex-1">
+                        <p class="text-center text-purple-medium/70 italic transcript-placeholder" >Your conversation transcript will appear here...</p>
+                    </div>
+                </section>
+                
+                <section class="bg-black-light shadow-card rounded-lg p-6 border border-purple-dark/20 flex flex-col">
+                    <h2 class="text-xl font-semibold text-purple-medium mb-4">AI Guidance</h2>
+                    <div id="guidanceContainer" class="scrollable-content space-y-4 flex-1">
+                        <p class="text-center text-purple-medium/70 italic guidance-placeholder">Start a conversation to receive AI guidance...</p>
+                    </div>
+                </section>
+            </div>
+        </main>
+         <template id="transcript-template">
+            <div class="bg-black-base text-purple-medium p-2 rounded-lg">
+                <span class="font-bold transcript-role"></span> 
+                <span class="transcript-text"></span>
+            </div>
+        </template>
+        
+        <template id="guidance-template">
+            <div class="bg-black-base text-purple-medium p-2 rounded-lg">
+                <div class="guidance-text transition-all duration-300" data-original-text=""></div>
+                <div class="feedback-buttons flex space-x-2 mt-2">
+                    <button class="feedback-button helpful transition-all duration-300 hover:scale-110" data-feedback="helpful">
+                        <i class="fas fa-thumbs-up"></i>
+                    </button>
+                    <button class="feedback-button not-helpful transition-all duration-300 hover:scale-110" data-feedback="not-helpful">
+                        <i class="fas fa-thumbs-down"></i>
+                    </button>
+                </div>
+            </div>
+        </template>
+
+        <div id="errorModal" class="fixed inset-0 bg-black-base/80 hidden items-center justify-center">
+            <div class="bg-black-light rounded-lg p-6 max-w-md w-full border border-purple-dark/20">
+                <div class="flex justify-between items-center mb-4">
+                    <h3 class="text-lg font-semibold text-rose-500">Error</h3>
+                    <button id="closeErrorModal" class="text-purple-medium hover:text-white">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <p id="errorMessage" class="mb-4 text-purple-medium"></p>
+                <button id="acknowledgeError" class="w-full bg-purple-dark text-white py-2 rounded-md hover:bg-purple-medium">
+                    OK
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/app.js"></script>
+</body>
+</html>
