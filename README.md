@@ -84,6 +84,37 @@ This is the entry point for users to interact with the ColdLine Assistant and ex
 ![Image](https://github.com/user-attachments/assets/3e853541-bd20-4704-970b-466575b622ba)
 
 
+### 1. ColdLine - Hindi Language Support  
+This screen demonstrates AI-driven responses in Hindi.  
+- **User Query:** "आपके पास कौन सी सिक्योरिटी मेजर है?"  
+- **AI Response:** Lists enterprise security measures.  
+- **Features:** Language selection, voice input, file upload.  
+
+![Image](https://github.com/user-attachments/assets/d6336813-b71b-4490-a1bb-2328dcd4c972)
+
+---
+
+### 2. ColdLine - English Language Support  
+This screen displays AI responses in English.  
+- **User Query:** "Why should we use your CRM over others?"  
+- **AI Response:** Highlights CRM features, AI analytics, and 24/7 support.  
+- **Features:** Real-time interaction, intuitive UI.  
+
+![Image](https://github.com/user-attachments/assets/e38dffcc-e2ee-402b-9aa4-7a8f435a86a6)  
+
+---
+
+### 3. ColdLine - German Language Support  
+This screen showcases multilingual AI guidance in German.  
+- **User Query:** "Warum CRM gegenüber anderen verwenden?"  
+- **AI Response:** Mentions CRM integration with Salesforce & Slack, boosting productivity.  
+- **Features:** Multilingual support, dynamic AI guidance.  
+
+![Image](https://github.com/user-attachments/assets/7da1457d-40dc-45c8-832e-cee97034178f) 
+
+
+
+
 
 
 
